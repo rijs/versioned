@@ -1,5 +1,4 @@
-var versioned = require('versioned').default
-  , core      = require('rijs.core').default
+var core      = require('rijs.core').default
   , data      = require('rijs.data').default
   , update    = require('utilise/update')
   , push      = require('utilise/push')
@@ -18,7 +17,7 @@ describe('Versioned', function(){
   it('should time travel - resource', function(){  
     var ripple = version(data(core()))
       
-    expect(ripple('foo', versioned({}))).to.be.eql({})
+    expect(ripple('foo', {})).to.be.eql({})
     expect(ripple.version('foo')).to.be.eql(0)
     expect(ripple.version.log).to.be.eql([[{ name: 'foo', index: 0 }]])
 
@@ -42,8 +41,8 @@ describe('Versioned', function(){
   it('should time travel - application', function(){  
     var ripple = version(data(core()))
       
-    expect(ripple('foo', versioned({}))).to.be.eql({})
-    expect(ripple('bar', versioned([]))).to.be.eql([])
+    expect(ripple('foo', {})).to.be.eql({})
+    expect(ripple('bar', [])).to.be.eql([])
     expect(ripple.version()).to.be.eql(1)
     expect(ripple.version.log).to.be.eql([
       [{ name: 'foo', index: 0 }]
@@ -78,13 +77,6 @@ describe('Versioned', function(){
     var ripple = version(data(core()))
     expect(ripple.version(false)).to.eql('could not rollback')
     expect(ripple.version(undefined)).to.eql('could not rollback')
-  })
-
-  it('should work gracefully with non-versioned data', function(){
-    var ripple = version(data(core()))
-    ripple('foo', [])
-    push('bar')(ripple('foo'))
-    expect(ripple.version.log).to.eql([])
   })
 
 })
