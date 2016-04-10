@@ -15,7 +15,7 @@ export default function version(ripple){
 const commit = ripple => (name, change) => logged(ripple.resources[name]) && 
   ripple.version.log
     .push(values(ripple.resources)
-      .filter(by('body.log'))
+      .filter(by(logged))
       .map(index))
 
 const index = ({ name, body }) => ({ name, index: body.log.length - 1 })
@@ -52,7 +52,7 @@ const calc = ripple => (name, index) => {
 
 const rel = (log, index) => index < 0 ? log.length + index - 1 : index
 
-const logged = key('body.log')
+const logged = res => res.body.log && res.body.log.max > 0
 
 const log = require('utilise/log')('[ri/versioned]')
     , err = require('utilise/err')('[ri/versioned]')

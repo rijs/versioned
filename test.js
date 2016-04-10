@@ -17,7 +17,7 @@ describe('Versioned', function(){
   it('should time travel - resource', function(){  
     var ripple = version(data(core()))
       
-    expect(ripple('foo', {})).to.be.eql({})
+    expect(ripple('foo', {}, { log: 10 })).to.be.eql({})
     expect(ripple.version('foo')).to.be.eql(0)
     expect(ripple.version.log).to.be.eql([[{ name: 'foo', index: 0 }]])
 
@@ -41,8 +41,8 @@ describe('Versioned', function(){
   it('should time travel - application', function(){  
     var ripple = version(data(core()))
       
-    expect(ripple('foo', {})).to.be.eql({})
-    expect(ripple('bar', [])).to.be.eql([])
+    expect(ripple('foo', {}, { log: 10 })).to.be.eql({})
+    expect(ripple('bar', [], { log: 10 })).to.be.eql([])
     expect(ripple.version()).to.be.eql(1)
     expect(ripple.version.log).to.be.eql([
       [{ name: 'foo', index: 0 }]

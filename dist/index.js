@@ -52,7 +52,7 @@ function version(ripple) {
 
 var commit = function commit(ripple) {
   return function (name, change) {
-    return logged(ripple.resources[name]) && ripple.version.log.push((0, _values2.default)(ripple.resources).filter((0, _by2.default)('body.log')).map(index));
+    return logged(ripple.resources[name]) && ripple.version.log.push((0, _values2.default)(ripple.resources).filter((0, _by2.default)(logged)).map(index));
   };
 };
 
@@ -103,7 +103,9 @@ var rel = function rel(log, index) {
   return index < 0 ? log.length + index - 1 : index;
 };
 
-var logged = (0, _key2.default)('body.log');
+var logged = function logged(res) {
+  return res.body.log && res.body.log.max > 0;
+};
 
 var log = require('utilise/log')('[ri/versioned]'),
     err = require('utilise/err')('[ri/versioned]');
