@@ -1,7 +1,7 @@
 // -------------------------------------------
 // Global Versioning and Time Travel
 // -------------------------------------------
-export default function version(ripple){
+module.exports = function version(ripple){
   log('creating')
 
   const type = ripple.types['application/data']
@@ -56,10 +56,10 @@ const logged = res => res.body.log && res.body.log.max > 0
 
 const log = require('utilise/log')('[ri/versioned]')
     , err = require('utilise/err')('[ri/versioned]')
-import values from 'utilise/values'
-import clone from 'utilise/clone'
-import set from 'utilise/set'
-import key from 'utilise/key'
-import def from 'utilise/def'
-import by from 'utilise/by'
-import is from 'utilise/is'
+    , values = require('utilise/values')
+    , clone = require('utilise/clone')
+    , set = require('utilise/set')
+    , key = require('utilise/key')
+    , def = require('utilise/def')
+    , by = require('utilise/by')
+    , is = require('utilise/is')
